@@ -113,6 +113,27 @@ class BinaryTree {
 
     return result
   }
+
+  postTraverse() {
+    const result = []
+    
+    function traversal(root) {
+      
+      if(root.left) {
+        traversal(root.left)
+      }
+
+      if(root.right) {
+        traversal(root.right)
+      }
+
+      result.push(root.value)
+    }
+    
+    traversal(this.root)
+
+    return result
+  }
 }
 
 const tree = new BinaryTree()
