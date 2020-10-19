@@ -94,6 +94,25 @@ class BinaryTree {
 
     return result
   }
+
+  preTraverse() {
+    const result = []
+    
+    function traversal(root) {
+      result.push(root.value)
+      if(root.left) {
+        traversal(root.left)
+      }
+
+      if(root.right) {
+        traversal(root.right)
+      }
+    }
+    
+    traversal(this.root)
+
+    return result
+  }
 }
 
 const tree = new BinaryTree()
@@ -113,7 +132,7 @@ tree.add(D)
 tree.add(E)
 tree.add(F)
 
-console.log(tree.inTraverse(5))
+console.log(tree.preTraverse())
 
 
 
