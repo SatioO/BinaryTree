@@ -185,5 +185,33 @@ for (let item of arr) {
   tree.add(item);
 }
 
-tree.deleteNode(78);
+function isBalanced(root) {
+  if (root === null) {
+    return true;
+  }
+
+  let lh = 0;
+  let rh = 0;
+
+  lh = checkHeight(root.left);
+  rh = checkHeight(root.right);
+  if (
+    Math.abs(lh - rh) <= 1 &&
+    isBalanced(root.left) &&
+    isBalanced(root.right)
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function checkHeight(root) {
+  if (root === null) {
+    return 0;
+  }
+
+  return Math.max(checkHeight(root.left), checkHeight(root.right)) + 1;
+}
 console.log(tree.root);
+console.log(isBalanced(tree.root));
