@@ -14,6 +14,7 @@ class BinaryTree {
   add(node) {
     if(this.root === null) {
       this.root = node
+      return;
     } else {
       function search(root) {
           if(node.value > root.value) {
@@ -136,42 +137,43 @@ class BinaryTree {
   }
 
   deleteNode(value) {
-    function removeNode(root) {
-      if(root === null) {
-        return null
+    function removeNode(root, value) {
+      if (root === null) {
+        return null;
       }
 
-      if(value === root.value) {
-        if(root.right === null && root.left === null) {
-          return null
+      if (value === root.value) {
+        if (root.left === null && root.right === null) {
+          return null;
         }
 
-        if(root.left === null) {
-          return root.right
+        if (root.left === null) {
+          return root.right;
         }
 
-        if(root.right === null) {
-          return root.left
+        if (root.right === null) {
+          return root.left;
         }
 
-        let tempNode = root.right
-        while(tempNode.left !== null) {
-          tempNode = tempNode.left
+        let tempNode = root.right;
+        while (tempNode.left !== null) {
+          tempNode = tempNode.left;
         }
-        root.value = tempNode.value
-        root.right = removeNode(tempNode.right)
-        return root
-      } else if(value < root.value) {
-        root.left = removeNode(root.left)
-        return root
-      } else if(value > root.value) {
-        root.right = removeNode(root.right)
-        return root
+        root.value = tempNode.value;
+        root.right = removeNode(root.right, root.value);
+        return root;
+      } else if (value < root.value) {
+        root.left = removeNode(root.left, value);
+        return root;
+      } else if (value > root.value) {
+        root.right = removeNode(root.right, value);
+        return root;
       }
     }
 
     let root = this.root
-    console.log(removeNode(root))
+    removeNode(root, value)
+    
   }
 }
 
@@ -196,6 +198,8 @@ tree.add(G)
 tree.add(H)
 
 tree.deleteNode(5)
+console.log(tree.root)
+
 
 
 
