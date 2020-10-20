@@ -134,6 +134,45 @@ class BinaryTree {
 
     return result
   }
+
+  deleteNode(value) {
+    function removeNode(root) {
+      if(root === null) {
+        return null
+      }
+
+      if(value === root.value) {
+        if(root.right === null && root.left === null) {
+          return null
+        }
+
+        if(root.left === null) {
+          return root.right
+        }
+
+        if(root.right === null) {
+          return root.left
+        }
+
+        let tempNode = root.right
+        while(tempNode.left !== null) {
+          tempNode = tempNode.left
+        }
+        root.value = tempNode.value
+        root.right = removeNode(tempNode.right)
+        return root
+      } else if(value < root.value) {
+        root.left = removeNode(root.left)
+        return root
+      } else if(value > root.value) {
+        root.right = removeNode(root.right)
+        return root
+      }
+    }
+
+    let root = this.root
+    console.log(removeNode(root))
+  }
 }
 
 const tree = new BinaryTree()
@@ -144,7 +183,8 @@ const C = new Node(3)
 const D = new Node(2)
 const E = new Node(1)
 const F = new Node(6)
-
+const G = new Node(7)
+const H = new Node(8)
 
 tree.add(A)
 tree.add(B)
@@ -152,8 +192,10 @@ tree.add(C)
 tree.add(D)
 tree.add(E)
 tree.add(F)
+tree.add(G)
+tree.add(H)
 
-console.log(tree.preTraverse())
+tree.deleteNode(5)
 
 
 
